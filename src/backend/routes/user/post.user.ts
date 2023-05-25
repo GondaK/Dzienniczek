@@ -23,14 +23,14 @@ export default {
             responseSuccessStatus: StatusCodes.CREATED,
             messages: { uniqueConstraintFailed: 'Email must be unique.' },
             execute: async () => {
-                const { email, name, password } = req.body
+                const { Email, Name, password } = req.body
                 const passwordHash = createHash(password, SALT)
-                return await prisma.user.create({
+                return await prisma.users.create({
                     data: {
-                        id: v4(),
-                        name,
-                        email,
-                        password: passwordHash,
+                        UserID: v4(),
+                        Name,
+                        Email,
+                        Password: passwordHash,
                     },
                 })
             },

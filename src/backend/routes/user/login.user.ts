@@ -19,11 +19,11 @@ export default {
             responseSuccessStatus: StatusCodes.OK,
             responseFailStatus: StatusCodes.UNAUTHORIZED,
             execute: async () => {
-                const { email, password } = req.body
+                const { Email, password } = req.body
                 const passwordHash = createHash(password, SALT)
-                const user = await prisma.user.findFirst({ where: { email } })
+                const user = await prisma.users.findFirst({ where: { Email } })
                 const passwordValid = user
-                    ? user.password === passwordHash
+                    ? user.Password === passwordHash
                     : false
                 if (!user || !passwordValid)
                     throw {
