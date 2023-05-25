@@ -16,10 +16,29 @@ model Users {
   Name      String?
   Password  String
   Teacher   Teacher?
+  Student   Student?
+  IsAdmin   Boolean @default(false)
 }
 
 model Teacher {
   TeacherID String @id
   User      Users  @relation(fields: [UserID], references: [UserID])
   UserID    String @unique
+  Classes   Class[]
+}
+
+model Student {
+  StudentID String @id
+  User      Users  @relation(fields: [UserID], references: [UserID])
+  UserID    String @unique
+  Class     Class  @relation(fields: [ClassID], references: [ClassID])
+  ClassID   String
+}
+
+model Class {
+  ClassID    String   @id
+  ClassName  String
+  TeacherID  String
+  Teacher    Teacher  @relation(fields: [TeacherID], references: [TeacherID])
+  Students   Student[]
 }

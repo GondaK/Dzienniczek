@@ -2,7 +2,10 @@
   "name": "js-node-react-app",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/GondaK/js-node-react-app.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GondaK/js-node-react-app.git"
+  },
   "author": "nashassjkdla",
   "license": "UNLICENSED",
   "private": true,
@@ -40,5 +43,11 @@
     "jsonwebtoken": "^9.0.0",
     "prisma": "^4.13.0",
     "uuid": "^9.0.0"
-  }
+  },
+  "description": "```\r yarn be-dev\r ```",
+  "bugs": {
+    "url": "https://github.com/GondaK/js-node-react-app/issues"
+  },
+  "homepage": "https://github.com/GondaK/js-node-react-app#readme",
+  "keywords": []
 }
