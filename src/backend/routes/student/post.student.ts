@@ -9,14 +9,14 @@ import { createHash } from '../../utils/hash.utils'
 import { authorize } from '../../utils/middleware.utils'
 const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 
-//Creates User and Student entity 
+//Creates User and Student entity
 export default {
     method: 'post',
     path: '/api/student',
     validators: [
         authorize,
-        body('email').isEmail(),
-        body('password').not().isEmpty(),
+        body('Email').isEmail(),
+        body('Password').not().isEmpty(),
     ],
     handler: async (req: Request, res: Response) =>
         handleRequest({
@@ -25,8 +25,8 @@ export default {
             responseSuccessStatus: StatusCodes.CREATED,
             messages: { uniqueConstraintFailed: 'Email must be unique.' },
             execute: async () => {
-                const { Email, Name, password } = req.body
-                const passwordHash = createHash(password, SALT)
+                const { Email, Name, Password } = req.body
+                const passwordHash = createHash(Password, SALT)
                 const user = await prisma.user.create({
                     data: {
                         UserID: v4(),
@@ -37,8 +37,8 @@ export default {
                 })
                 return await prisma.student.create({
                     data: {
-                      StudentID: v4(),
-                      UserID: user.UserID
+                        StudentID: v4(),
+                        UserID: user.UserID,
                     },
                 })
             },
