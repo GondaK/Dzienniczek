@@ -21,7 +21,7 @@ export default {
             execute: async () => {
                 const { Email, password } = req.body
                 const passwordHash = createHash(password, SALT)
-                const user = await prisma.users.findFirst({ where: { Email } })
+                const user = await prisma.user.findFirst({ where: { Email } })
                 const passwordValid = user
                     ? user.Password === passwordHash
                     : false

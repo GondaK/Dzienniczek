@@ -8,10 +8,13 @@ import { handleRequest } from '../../utils/request.utils'
 import { createHash } from '../../utils/hash.utils'
 import { authorize } from '../../utils/middleware.utils'
 const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
+
+//Creates User and Student entity 
 export default {
     method: 'post',
-    path: '/api/user',
+    path: '/api/student',
     validators: [
+        authorize,
         body('email').isEmail(),
         body('password').not().isEmpty(),
     ],
@@ -24,12 +27,18 @@ export default {
             execute: async () => {
                 const { Email, Name, password } = req.body
                 const passwordHash = createHash(password, SALT)
-                return await prisma.user.create({
+                const user = await prisma.user.create({
                     data: {
                         UserID: v4(),
                         Name,
                         Email,
                         Password: passwordHash,
+                    },
+                })
+                return await prisma.student.create({
+                    data: {
+                      StudentID: v4(),
+                      UserID: user.UserID
                     },
                 })
             },

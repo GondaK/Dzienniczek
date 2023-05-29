@@ -32,8 +32,8 @@ model Student {
   StudentID String @id
   User      User  @relation(fields: [UserID], references: [UserID])
   UserID    String @unique
-  Class     Class  @relation(fields: [ClassID], references: [ClassID])
-  ClassID   String
+  Class     Class?  @relation(fields: [ClassID], references: [ClassID])
+  ClassID   String?
   Grades    Grade[]
 }
 
