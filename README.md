@@ -24,7 +24,10 @@ npx prisma studio
  npx prisma migrate dev --name init
 ```
 
-### Wygenerowanie migracji
+### Dane logowania administratora
 ```
- npx prisma migrate dev --name init
+{
+    "Email": "admin@admin.com",
+    "Password": "Admin"
+}
 ```

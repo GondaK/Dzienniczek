@@ -11,7 +11,7 @@ const SECRET = (process.env.TOKEN_SECRET as string) ?? 'XYZ'
 export default {
     method: 'get',
     path: '/api/login',
-    validators: [body('email').isEmail(), body('password').not().isEmpty()],
+    validators: [body('Email').isEmail(), body('Password').not().isEmpty()],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,
@@ -19,8 +19,8 @@ export default {
             responseSuccessStatus: StatusCodes.OK,
             responseFailStatus: StatusCodes.UNAUTHORIZED,
             execute: async () => {
-                const { Email, password } = req.body
-                const passwordHash = createHash(password, SALT)
+                const { Email, Password } = req.body
+                const passwordHash = createHash(Password, SALT)
                 const user = await prisma.user.findFirst({ where: { Email } })
                 const passwordValid = user
                     ? user.Password === passwordHash
