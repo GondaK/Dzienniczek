@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Users {
+model User {
   UserID    String @id
   Email     String @unique
   Name      String?
@@ -22,17 +22,19 @@ model Users {
 
 model Teacher {
   TeacherID String @id
-  User      Users  @relation(fields: [UserID], references: [UserID])
+  User      User  @relation(fields: [UserID], references: [UserID])
   UserID    String @unique
   Classes   Class[]
+  Subjects   Subject[]
 }
 
 model Student {
   StudentID String @id
-  User      Users  @relation(fields: [UserID], references: [UserID])
+  User      User  @relation(fields: [UserID], references: [UserID])
   UserID    String @unique
   Class     Class  @relation(fields: [ClassID], references: [ClassID])
   ClassID   String
+  Grades    Grade[]
 }
 
 model Class {
@@ -41,4 +43,21 @@ model Class {
   TeacherID  String
   Teacher    Teacher  @relation(fields: [TeacherID], references: [TeacherID])
   Students   Student[]
+}
+
+model Subject {
+  SubjectID    String   @id
+  SubjectName  String
+  TeacherID    String
+  Teacher      Teacher  @relation(fields: [TeacherID], references: [TeacherID])
+  Grades       Grade[]
+}
+
+model Grade {
+  GradeId      String   @id
+  GradeValue   String
+  SubjectID    String
+  Subject      Subject   @relation(fields: [SubjectID], references: [SubjectID])
+  StudentID    String
+  Student      Student  @relation(fields: [StudentID], references: [StudentID])
 }
