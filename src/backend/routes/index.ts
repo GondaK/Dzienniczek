@@ -5,6 +5,7 @@ import postStudent from './student/post.student'
 import getLoginUser from './user/login.user'
 import postTeacher from './teacher/post.teacher'
 import deleteStudent from './student/delete.student'
+import deleteTeacher from './teacher/delete.teacher'
 const router = express.Router()
 // home page route
 router.get('/', (req, res) => {
@@ -17,6 +18,7 @@ const apiRoutes = [
     postStudent,
     postTeacher,
     deleteStudent,
+    deleteTeacher,
 ]
 apiRoutes.forEach((route) =>
     router[route.method](route.path, route.validators, route.handler),

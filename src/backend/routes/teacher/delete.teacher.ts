@@ -7,7 +7,7 @@ import { authorize } from '../../utils/middleware.utils'
 
 export default {
     method: 'delete',
-    path: '/api/student',
+    path: '/api/teacher',
     validators: [authorize],
     handler: async (req: Request, res: Response) =>
         handleRequest({
@@ -15,24 +15,23 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.NO_CONTENT,
             execute: async () => {
-                const { studentId } = req.body
-                console.log(studentId)
-                const student = await prisma.student.findFirst({
+                const { teacherId } = req.body
+                const teacher = await prisma.teacher.findFirst({
                     where: {
-                        StudentID: studentId,
+                        TeacherID: teacherId,
                     },
                 })
-                await prisma.student.delete({
+                await prisma.teacher.delete({
                     where: {
-                        StudentID: studentId,
+                        TeacherID: teacherId,
                     },
                 })
                 await prisma.user.delete({
                     where: {
-                        UserID: student?.UserID,
+                        UserID: teacher?.UserID,
                     },
                 })
-                res.send('poprawnie wykonano usuniecie Student')
+                res.send('poprawnie wykonano usuniecie Teacher')
             },
         }),
 } as TRoute
