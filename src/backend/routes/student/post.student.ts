@@ -6,7 +6,7 @@ import { prisma } from '../../database'
 import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
 import { createHash } from '../../utils/hash.utils'
-import { authenticateAdmin, authorize } from '../../utils/middleware.utils'
+import { authenticateAdmin, authorize } from "../../utils/middleware.utils";
 const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 
 //Creates User and Student entity

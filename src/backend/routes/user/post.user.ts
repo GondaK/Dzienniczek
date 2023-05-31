@@ -6,7 +6,7 @@ import { prisma } from '../../database'
 import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
 import { createHash } from '../../utils/hash.utils'
-import { authorize, authenticateAdmin } from '../../utils/middleware.utils'
+import { authenticateAdmin, authorize } from '../../utils/middleware.utils'
 const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 export default {
     method: 'post',
@@ -24,7 +24,6 @@ export default {
             responseSuccessStatus: StatusCodes.CREATED,
             messages: { uniqueConstraintFailed: 'Email must be unique.' },
             execute: async () => {
-                return
                 const { Email, Name, Password } = req.body
                 const passwordHash = createHash(Password, SALT)
                 return await prisma.user.create({
