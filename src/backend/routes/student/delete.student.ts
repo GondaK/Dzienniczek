@@ -15,16 +15,15 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.NO_CONTENT,
             execute: async () => {
-                const { studentId } = req.body
-                console.log(studentId)
+                const { StudentId } = req.body
                 const student = await prisma.student.findFirst({
                     where: {
-                        StudentID: studentId,
+                        StudentID: StudentId,
                     },
                 })
                 await prisma.student.delete({
                     where: {
-                        StudentID: studentId,
+                        StudentID: StudentId,
                     },
                 })
                 await prisma.user.delete({
