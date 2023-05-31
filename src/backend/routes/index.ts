@@ -9,6 +9,7 @@ import deleteTeacher from './teacher/delete.teacher'
 import postClass from './class/post.class'
 import putSetClass from './student/put.set-class'
 import updateStudent from './student/update.student'
+import putClass from './class/put.class'
 const router = express.Router()
 // home page route
 router.get('/', (req, res) => {
@@ -25,6 +26,7 @@ const apiRoutes = [
     postClass,
     putSetClass,
     updateStudent,
+    putClass,
 ]
 apiRoutes.forEach((route) =>
     router[route.method](route.path, route.validators, route.handler),
