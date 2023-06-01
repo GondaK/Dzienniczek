@@ -56,6 +56,7 @@ model Subject {
 model Grade {
   GradeId      String   @id
   GradeValue   String
+  GradeName    String
   SubjectID    String
   Subject      Subject   @relation(fields: [SubjectID], references: [SubjectID])
   StudentID    String

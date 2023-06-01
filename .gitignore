@@ -3,4 +3,3 @@
 .env
 .idea
 yarn-error.log
-prisma/gradebook.db
