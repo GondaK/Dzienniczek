@@ -19,7 +19,7 @@ import getSubject from './subject/get.subject'
 import deleteSubject from './subject/delete.subject'
 import postGrade from './grade/post.grade'
 import putGrade from './grade/put.grade'
-import deleteGradet from './grade/delete.grade'
+import deleteGrade from './grade/delete.grade'
 
 const router = express.Router()
 // home page route
@@ -47,7 +47,7 @@ const apiRoutes = [
     deleteSubject,
     postGrade,
     putGrade,
-    deleteGradet,
+    deleteGrade,
 ]
 apiRoutes.forEach((route) =>
     router[route.method](route.path, route.validators, route.handler),
