@@ -14,7 +14,7 @@ const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 export default {
     method: 'post',
     path: '/api/grade',
-    validators: [authorize, authenticateTeacher],
+    validators: [authorize, authenticateTeacher ],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,

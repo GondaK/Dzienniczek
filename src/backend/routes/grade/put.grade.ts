@@ -4,13 +4,13 @@ import { StatusCodes } from 'http-status-codes'
 import { prisma } from '../../database'
 import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
-import { authenticateAdmin, authorize } from '../../utils/middleware.utils'
+import { authenticateTeacher, authorize } from '../../utils/middleware.utils'
 
 //Update data in grade
 export default {
     method: 'put',
     path: '/api/grade/update',
-    validators: [authorize, authenticateAdmin],
+    validators: [authorize, authenticateTeacher],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,
