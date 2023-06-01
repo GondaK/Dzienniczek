@@ -7,7 +7,7 @@ import { authorize } from '../../utils/middleware.utils'
 
 export default {
     method: 'get',
-    path: '/api/student/get-student',
+    path: '/api/student',
     validators: [authorize],
     handler: async (req: Request, res: Response) =>
         handleRequest({
@@ -17,6 +17,9 @@ export default {
             execute: async () => {
                 const { StudentID } = req.body
                 return await prisma.student.findUnique({
+                    include: {
+                        Grades: true,
+                    },
                     where: {
                         StudentID: StudentID,
                     },

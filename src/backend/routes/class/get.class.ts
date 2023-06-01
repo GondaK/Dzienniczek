@@ -17,6 +17,9 @@ export default {
             execute: async () => {
                 const { ClassID } = req.body
                 return await prisma.class.findUnique({
+                    include: {
+                        Students: true,
+                    },
                     where: {
                         ClassID: ClassID,
                     },
