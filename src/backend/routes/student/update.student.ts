@@ -4,7 +4,7 @@ import { StatusCodes } from 'http-status-codes'
 import { prisma } from '../../database'
 import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
-import { authorize } from '../../utils/middleware.utils'
+import { authenticateAdmin, authorize } from '../../utils/middleware.utils'
 import { createHash } from '../../utils/hash.utils'
 const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 
@@ -12,7 +12,9 @@ const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 export default {
     method: 'put',
     path: '/api/student/update',
-    validators: [authorize],
+    validators: [authorize,
+        authenticateAdmin,
+    ],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,

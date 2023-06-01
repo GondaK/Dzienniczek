@@ -6,16 +6,16 @@ import { prisma } from '../../database'
 import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
 import { createHash } from '../../utils/hash.utils'
-import { authenticateAdmin, authorize } from '../../utils/middleware.utils'
+import { authorize, authenticateAdmin} from '../../utils/middleware.utils'
 const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 
-//Creates class
+//Creates subject
 export default {
     method: 'post',
-    path: '/api/class',
+    path: '/api/subject',
     validators: [
         authorize,
-        authenticateAdmin
+        authenticateAdmin,
     ],
     handler: async (req: Request, res: Response) =>
         handleRequest({
@@ -23,11 +23,11 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.CREATED,
             execute: async () => {
-                const { ClassName, TeacherID } = req.body
-                return await prisma.class.create({
+                const { SubjectName, TeacherID } = req.body
+                return await prisma.subject.create({
                     data: {
-                        ClassID: v4(),
-                        ClassName,
+                        SubjectID: v4(),
+                        SubjectName,
                         TeacherID,
                     },
                 })

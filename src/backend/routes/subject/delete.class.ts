@@ -7,34 +7,21 @@ import { authenticateAdmin, authorize } from '../../utils/middleware.utils'
 
 export default {
     method: 'delete',
-    path: '/api/student/delete',
-    validators: [
-        authorize,
-        authenticateAdmin,
-    ],
+    path: '/api/subject/delete',
+    validators: [authorize, authenticateAdmin],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,
             res,
             responseSuccessStatus: StatusCodes.NO_CONTENT,
             execute: async () => {
-                const { StudentId } = req.body
-                const student = await prisma.student.findFirst({
+                const { SubjectID } = req.body
+                return await prisma.subject.delete({
                     where: {
-                        StudentID: StudentId,
+                        SubjectID: SubjectID,
                     },
                 })
-                await prisma.student.delete({
-                    where: {
-                        StudentID: StudentId,
-                    },
-                })
-                await prisma.user.delete({
-                    where: {
-                        UserID: student?.UserID,
-                    },
-                })
-                res.send('poprawnie wykonano usuniecie Student')
+                res.send('poprawniee wykonano usuniecie subject')
             },
         }),
 } as TRoute

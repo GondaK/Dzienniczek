@@ -3,12 +3,15 @@ import { StatusCodes } from 'http-status-codes'
 import { prisma } from '../../database'
 import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
-import { authorize } from '../../utils/middleware.utils'
+import { authenticateAdmin, authorize } from '../../utils/middleware.utils'
 
 export default {
     method: 'delete',
     path: '/api/teacher/delete',
-    validators: [authorize],
+    validators: [
+        authorize,
+        authenticateAdmin,
+    ],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,

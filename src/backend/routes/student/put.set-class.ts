@@ -4,13 +4,16 @@ import { StatusCodes } from 'http-status-codes'
 import { prisma } from '../../database'
 import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
-import { authorize } from '../../utils/middleware.utils'
+import { authenticateAdmin, authorize } from '../../utils/middleware.utils'
 
 //Put student to class
 export default {
     method: 'put',
     path: '/api/student/set-class',
-    validators: [authorize],
+    validators: [
+        authorize,
+        authenticateAdmin,
+    ],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,
