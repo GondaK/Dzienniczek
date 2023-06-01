@@ -18,22 +18,20 @@ export default {
             responseSuccessStatus: StatusCodes.CREATED,
             execute: async () => {
                 const {
-                    GradeID,
+                    GradeId,
                     GradeValue,
                     GradeName,
-                    SubjectId,
-                    TeacherID,
+                    SubjectID,
                     StudentID,
                 } = req.body
                 return await prisma.grade.update({
                     where: {
-                        GradeID,
+                        GradeId
                     },
                     data: {
                         GradeValue,
                         GradeName,
-                        SubjectId,
-                        TeacherID,
+                        SubjectID,
                         StudentID,
                     },
                 })

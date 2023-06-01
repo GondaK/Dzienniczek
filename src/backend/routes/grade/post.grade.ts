@@ -7,6 +7,7 @@ import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
 import { createHash } from '../../utils/hash.utils'
 import { authorize, authenticateTeacher } from '../../utils/middleware.utils'
+
 const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 
 //Creates grade
@@ -23,8 +24,7 @@ export default {
                 const {
                     GradeValue,
                     GradeName,
-                    SubjectId,
-                    TeacherID,
+                    SubjectID,
                     StudentID,
                 } = req.body
                 return await prisma.grade.create({
@@ -32,8 +32,7 @@ export default {
                         GradeId: v4(),
                         GradeValue,
                         GradeName,
-                        SubjectId,
-                        TeacherID,
+                        SubjectID,
                         StudentID,
                     },
                 })
