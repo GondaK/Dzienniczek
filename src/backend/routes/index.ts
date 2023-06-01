@@ -14,9 +14,12 @@ import updateTeacher from './teacher/update.teacher'
 import getClass from './class/get.class'
 import deleteClass from './class/delete.class'
 import putSubject from './subject/put.subject'
-import updateSubject from './subject/put.subject'
+import postSubject from './subject/post.subject'
 import getSubject from './subject/get.subject'
 import deleteSubject from './subject/delete.subject'
+import postGrade from './grade/post.grade'
+import putGrade from './grade/put.grade'
+import deleteGradet from './grade/delete.grade'
 
 const router = express.Router()
 // home page route
@@ -39,9 +42,12 @@ const apiRoutes = [
     getClass,
     deleteClass,
     putSubject,
-    updateSubject,
+    postSubject,
     getSubject,
     deleteSubject,
+    postGrade,
+    putGrade,
+    deleteGradet,
 ]
 apiRoutes.forEach((route) =>
     router[route.method](route.path, route.validators, route.handler),
