@@ -7,7 +7,7 @@ import { authorize } from '../../utils/middleware.utils'
 
 export default {
     method: 'delete',
-    path: '/api/teacher',
+    path: '/api/teacher/delete',
     validators: [authorize],
     handler: async (req: Request, res: Response) =>
         handleRequest({
