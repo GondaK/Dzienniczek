@@ -8,6 +8,8 @@ import { createHash } from '../../utils/hash.utils'
 import { createToken } from '../../utils/jwt.utils'
 const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 const SECRET = (process.env.TOKEN_SECRET as string) ?? 'XYZ'
+
+// Logging into the system, returns JWT token of logged-in user
 export default {
     method: 'get',
     path: '/api/login',

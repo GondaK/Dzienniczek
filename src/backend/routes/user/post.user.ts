@@ -8,6 +8,8 @@ import { handleRequest } from '../../utils/request.utils'
 import { createHash } from '../../utils/hash.utils'
 import { authenticateAdmin, authorize } from '../../utils/middleware.utils'
 const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
+
+// Adding empty User entity
 export default {
     method: 'post',
     path: '/api/user',

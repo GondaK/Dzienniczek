@@ -10,10 +10,7 @@ import { authenticateAdmin, authorize } from '../../utils/middleware.utils'
 export default {
     method: 'put',
     path: '/api/student/set-class',
-    validators: [
-        authorize,
-        authenticateAdmin,
-    ],
+    validators: [authorize, authenticateAdmin],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,

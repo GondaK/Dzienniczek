@@ -8,13 +8,11 @@ import { authenticateAdmin, authorize } from '../../utils/middleware.utils'
 import { createHash } from '../../utils/hash.utils'
 const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 
-//Put student to class
+// Update Studnet
 export default {
     method: 'put',
     path: '/api/student/update',
-    validators: [authorize,
-        authenticateAdmin,
-    ],
+    validators: [authorize, authenticateAdmin],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,
@@ -28,6 +26,8 @@ export default {
                         StudentID: StudentID,
                     },
                 })
+
+                // Update Related User
                 return await prisma.user.update({
                     where: {
                         UserID: student?.UserID,

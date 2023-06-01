@@ -6,17 +6,14 @@ import { prisma } from '../../database'
 import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
 import { createHash } from '../../utils/hash.utils'
-import { authorize, authenticateAdmin} from '../../utils/middleware.utils'
+import { authorize, authenticateAdmin } from '../../utils/middleware.utils'
 const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 
 //Creates subject
 export default {
     method: 'post',
     path: '/api/subject',
-    validators: [
-        authorize,
-        authenticateAdmin,
-    ],
+    validators: [authorize, authenticateAdmin],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,

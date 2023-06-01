@@ -1,5 +1,4 @@
 import { Request, Response } from 'express'
-import { body } from 'express-validator'
 import { StatusCodes } from 'http-status-codes'
 import { prisma } from '../../database'
 import { TRoute } from '../types'
@@ -26,6 +25,8 @@ export default {
                         TeacherID: TeacherID,
                     },
                 })
+
+                // Update Related User
                 return await prisma.user.update({
                     where: {
                         UserID: teacher?.UserID,

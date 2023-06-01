@@ -4,6 +4,7 @@ import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
 import * as http from 'http'
 
+// Responsible for providing weather for Poznan using api.open-meteo.com API
 export default {
     method: 'get',
     path: '/api/weather',
@@ -14,6 +15,7 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.OK,
             execute: async () => {
+                // API Call parameters for weather API
                 const params = {
                     host: 'api.open-meteo.com',
                     port: 80,
@@ -22,6 +24,7 @@ export default {
                 }
 
                 return await httpRequest(params).then(function (body: any) {
+                    // Formatting result to format: time->temperature
                     const mapArrays = (arr1 = [], arr2 = []) => {
                         const res = arr1.reduce((acc, elem, index) => {
                             acc[elem] = arr2[index]
@@ -38,6 +41,7 @@ export default {
         }),
 } as TRoute
 
+// Responsible for handling http requests for given parameters
 function httpRequest(params: any, postData = null) {
     return new Promise(function (resolve, reject) {
         const req = http.request(params, function (res) {

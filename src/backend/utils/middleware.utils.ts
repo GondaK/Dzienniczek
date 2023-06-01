@@ -4,6 +4,8 @@ import { StatusCodes } from 'http-status-codes'
 import { prisma } from '../database'
 
 const SECRET = (process.env.TOKEN_SECRET as string) ?? 'XYZ'
+
+// Check if token contains a valid user token
 export const authorize = (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization
     const parsedToken = token?.replace('Bearer ', '')
@@ -14,6 +16,7 @@ export const authorize = (req: Request, res: Response, next: NextFunction) => {
     next()
 }
 
+// Check if token contains a valid Admin token
 export const authenticateAdmin = (
     req: Request,
     res: Response,
@@ -31,6 +34,7 @@ export const authenticateAdmin = (
     next()
 }
 
+// Check if token contains a valid Teacher token
 export const authenticateTeacher = async (
     req: Request,
     res: Response,
@@ -53,6 +57,7 @@ export const authenticateTeacher = async (
     next()
 }
 
+// Check if token contains a valid Student token
 export const authenticateStudent = async (
     req: Request,
     res: Response,

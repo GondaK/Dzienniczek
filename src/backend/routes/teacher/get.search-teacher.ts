@@ -5,6 +5,7 @@ import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
 import { authorize } from '../../utils/middleware.utils'
 
+// Allows to query teacher by his name
 export default {
     method: 'get',
     path: '/api/teacher/search-teacher',
@@ -16,6 +17,8 @@ export default {
             responseSuccessStatus: StatusCodes.OK,
             execute: async () => {
                 const { Name } = req.body
+
+                // Join User entity and compare name
                 return await prisma.teacher.findMany({
                     include: {
                         User: true,
