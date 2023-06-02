@@ -15,7 +15,9 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.NO_CONTENT,
             execute: async () => {
+                // Get the SubjectID from the request body
                 const { SubjectID } = req.body
+                // Find the Subject in the database and delete it
                 return await prisma.subject.delete({
                     where: {
                         SubjectID: SubjectID,

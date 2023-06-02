@@ -5,18 +5,13 @@ import { v4 } from 'uuid'
 import { prisma } from '../../database'
 import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
-import { createHash } from '../../utils/hash.utils'
-import { authorize, authenticateAdmin} from '../../utils/middleware.utils'
-const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
+import { authorize, authenticateAdmin } from '../../utils/middleware.utils'
 
 //Creates subject
 export default {
     method: 'post',
     path: '/api/subject',
-    validators: [
-        authorize,
-        authenticateAdmin,
-    ],
+    validators: [authorize, authenticateAdmin],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,
@@ -24,6 +19,7 @@ export default {
             responseSuccessStatus: StatusCodes.CREATED,
             execute: async () => {
                 const { SubjectName, TeacherID } = req.body
+                // Create new subject in database.
                 return await prisma.subject.create({
                     data: {
                         SubjectID: v4(),

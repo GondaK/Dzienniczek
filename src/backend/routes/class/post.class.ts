@@ -13,17 +13,16 @@ const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 export default {
     method: 'post',
     path: '/api/class',
-    validators: [
-        authorize,
-        authenticateAdmin
-    ],
+    validators: [authorize, authenticateAdmin],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,
             res,
             responseSuccessStatus: StatusCodes.CREATED,
             execute: async () => {
+                // Extract the data from the request body
                 const { ClassName, TeacherID } = req.body
+                // Create a new class in the database
                 return await prisma.class.create({
                     data: {
                         ClassID: v4(),

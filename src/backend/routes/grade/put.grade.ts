@@ -17,17 +17,16 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.CREATED,
             execute: async () => {
-                const {
-                    GradeId,
-                    GradeValue,
-                    GradeName,
-                    SubjectID,
-                    StudentID,
-                } = req.body
+                // 1. Destructure the variables from the request body
+                const { GradeId, GradeValue, GradeName, SubjectID, StudentID } =
+                    req.body
+                // 2. Call the Prisma Client function to update a grade
                 return await prisma.grade.update({
+                    // 3. Set the where clause to the GradeId
                     where: {
-                        GradeId
+                        GradeId,
                     },
+                    // 4. Set the new values for the grade
                     data: {
                         GradeValue,
                         GradeName,

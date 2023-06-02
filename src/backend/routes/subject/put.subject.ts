@@ -17,7 +17,11 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.CREATED,
             execute: async () => {
+                // Destructure the request body to get the SubjectID, SubjectName and TeacherID
                 const { SubjectID, SubjectName, TeacherID } = req.body
+
+                // Update the subject with the given SubjectID
+                // Update the SubjectName and the TeacherID
                 return await prisma.subject.update({
                     where: {
                         SubjectID,

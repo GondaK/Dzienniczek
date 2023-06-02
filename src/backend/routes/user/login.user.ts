@@ -19,18 +19,24 @@ export default {
             responseSuccessStatus: StatusCodes.OK,
             responseFailStatus: StatusCodes.UNAUTHORIZED,
             execute: async () => {
+                // Destructure email and password from the request body
                 const { Email, Password } = req.body
+                // Hash the password
                 const passwordHash = createHash(Password, SALT)
+                // Find the user with the given email
                 const user = await prisma.user.findFirst({ where: { Email } })
+                // Check if the given password matches the hashed password in the database
                 const passwordValid = user
                     ? user.Password === passwordHash
                     : false
+                // If the user doesn't exist or the password is invalid, throw an error
                 if (!user || !passwordValid)
                     throw {
                         status: StatusCodes.UNAUTHORIZED,
                         message: ReasonPhrases.UNAUTHORIZED,
                         isCustomError: true,
                     } as TCustomError
+                // If the user exists and the password is valid, create and return a JWT token
                 return {
                     token: createToken(user, SECRET, '7d'),
                 }

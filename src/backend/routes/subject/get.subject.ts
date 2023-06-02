@@ -15,7 +15,9 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.OK,
             execute: async () => {
+                // Get the SubjectID from the request body
                 const { SubjectID } = req.body
+                // Find the Subject in the database
                 return await prisma.subject.findUnique({
                     where: {
                         SubjectID: SubjectID,

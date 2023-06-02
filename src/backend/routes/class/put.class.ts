@@ -17,7 +17,10 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.CREATED,
             execute: async () => {
+                // Destructure the request body
                 const { ClassID, ClassName, TeacherID } = req.body
+
+                // Use Prisma to update the Class data
                 return await prisma.class.update({
                     where: {
                         ClassID,

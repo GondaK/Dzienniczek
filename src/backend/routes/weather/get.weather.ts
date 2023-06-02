@@ -14,6 +14,7 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.OK,
             execute: async () => {
+                // Specify the API endpoint and the parameters
                 const params = {
                     host: 'api.open-meteo.com',
                     port: 80,
@@ -21,7 +22,9 @@ export default {
                     method: 'GET',
                 }
 
+                // Make an HTTP request
                 return await httpRequest(params).then(function (body: any) {
+                    // Map the time and temperature arrays to an object
                     const mapArrays = (arr1 = [], arr2 = []) => {
                         const res = arr1.reduce((acc, elem, index) => {
                             acc[elem] = arr2[index]
@@ -41,10 +44,12 @@ export default {
 function httpRequest(params: any, postData = null) {
     return new Promise(function (resolve, reject) {
         const req = http.request(params, function (res) {
+            // Store each chunk of data in an array
             let body: any[] = []
             res.on('data', function (chunk) {
                 body.push(chunk)
             })
+            // Join the chunks together and parse them as JSON
             res.on('end', function () {
                 try {
                     body = JSON.parse(Buffer.concat(body).toString())

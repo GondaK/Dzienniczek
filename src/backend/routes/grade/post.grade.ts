@@ -14,20 +14,18 @@ const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 export default {
     method: 'post',
     path: '/api/grade',
-    validators: [authorize, authenticateTeacher ],
+    validators: [authorize, authenticateTeacher],
     handler: async (req: Request, res: Response) =>
         handleRequest({
             req,
             res,
             responseSuccessStatus: StatusCodes.CREATED,
             execute: async () => {
-                const {
-                    GradeValue,
-                    GradeName,
-                    SubjectID,
-                    StudentID,
-                } = req.body
+                // 1. Destructure the req.body object to get its properties
+                const { GradeValue, GradeName, SubjectID, StudentID } = req.body
+                // 2. Return the result of the prisma.grade.create method
                 return await prisma.grade.create({
+                    // 3. Pass the data object with the properties that the method expects
                     data: {
                         GradeId: v4(),
                         GradeValue,

@@ -15,12 +15,15 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.NO_CONTENT,
             execute: async () => {
+                // 1. Get the ClassID from the request body
                 const { ClassID } = req.body
+                // 2. Use Prisma Client to delete the Class
                 return await prisma.class.delete({
                     where: {
                         ClassID: ClassID,
                     },
                 })
+                // 3. Send the response
                 res.send('poprawnie wykonano usuniecie Class')
             },
         }),

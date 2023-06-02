@@ -19,13 +19,17 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.CREATED,
             execute: async () => {
+                // Get the TeacherID, Name, Email, and Password from the request body
                 const { TeacherID, Name, Email, Password } = req.body
+                // Create a hashed password
                 const passwordHash = createHash(Password, SALT)
+                // Find the teacher in the database
                 const teacher = await prisma.teacher.findFirst({
                     where: {
                         TeacherID: TeacherID,
                     },
                 })
+                // Update the user in the database
                 return await prisma.user.update({
                     where: {
                         UserID: teacher?.UserID,

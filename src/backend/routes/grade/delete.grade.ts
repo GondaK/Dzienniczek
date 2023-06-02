@@ -15,12 +15,15 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.NO_CONTENT,
             execute: async () => {
+                // Get the GradeId from the request body
                 const { GradeId } = req.body
+                // Delete the grade
                 return await prisma.grade.delete({
                     where: {
                         GradeId: GradeId,
                     },
                 })
+                // Send a response
                 res.send('poprawniee wykonano usuniecie grade')
             },
         }),

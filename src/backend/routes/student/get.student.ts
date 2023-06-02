@@ -15,11 +15,15 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.OK,
             execute: async () => {
+                // Destructure the StudentID from the request body
                 const { StudentID } = req.body
+                // Use Prisma to find the student with the StudentID
                 return await prisma.student.findUnique({
+                    // Include the student's grades in the response
                     include: {
                         Grades: true,
                     },
+                    // Find the student with the StudentID
                     where: {
                         StudentID: StudentID,
                     },

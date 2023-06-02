@@ -15,7 +15,9 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.OK,
             execute: async () => {
+                // Get the ClassID from the request body
                 const { ClassID } = req.body
+                // Retrieve the Class and all of its Students from the database
                 return await prisma.class.findUnique({
                     include: {
                         Students: true,
