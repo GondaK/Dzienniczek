@@ -1,5 +1,4 @@
 import { Request, Response } from 'express'
-import { body } from 'express-validator'
 import { StatusCodes } from 'http-status-codes'
 import { prisma } from '../../database'
 import { TRoute } from '../types'

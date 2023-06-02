@@ -8,7 +8,7 @@ import { authenticateAdmin, authorize } from '../../utils/middleware.utils'
 import { createHash } from '../../utils/hash.utils'
 const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 
-//Put student to class
+// Update Studnet
 export default {
     method: 'put',
     path: '/api/student/update',
