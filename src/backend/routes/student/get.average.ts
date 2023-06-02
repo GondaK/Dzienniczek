@@ -20,16 +20,20 @@ export default {
             res,
             responseSuccessStatus: StatusCodes.OK,
             execute: async () => {
+                // Get the subject ID from the request body
                 const { SubjectID } = req.body
 
+                // Get the current user from the request
                 const user = await getUser(req)
 
+                // If there is no user, return a 403 (forbidden) response
                 if (null === user) {
                     res.sendStatus(StatusCodes.FORBIDDEN)
 
                     return
                 }
 
+                // Get all the grades for the current user in the subject
                 const grades = await prisma.grade.findMany({
                     include: {
                         Student: true,
@@ -41,6 +45,8 @@ export default {
                         },
                     },
                 })
+
+                // Calculate the average grade
                 let count = 0
                 let sum = 0
                 grades.forEach((grade) => {
