@@ -79,3 +79,15 @@ export const authenticateStudent = async (
 
     next()
 }
+
+// Check if token contains a valid Student token
+export const getUser = async (req: Request) => {
+    const token = req.headers.authorization
+    const parsedToken = token?.replace('Bearer ', '')
+    const result = verifyToken(parsedToken ?? '', SECRET)
+    return await prisma.user.findFirst({
+        where: {
+            UserID: result.content.UserID,
+        },
+    })
+}

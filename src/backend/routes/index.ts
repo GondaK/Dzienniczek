@@ -22,6 +22,8 @@ import putGrade from './grade/put.grade'
 import deleteGrade from './grade/delete.grade'
 import getSearchTeacher from './teacher/get.search-teacher'
 import getStudent from './student/get.student'
+import getWeather from "./weather/get.weather";
+import getAverage from "./student/get.average";
 
 const router = express.Router()
 // home page route
@@ -52,6 +54,8 @@ const apiRoutes = [
     deleteGrade,
     getSearchTeacher,
     getStudent,
+    getWeather,
+    getAverage,
 ]
 apiRoutes.forEach((route) =>
     router[route.method](route.path, route.validators, route.handler),

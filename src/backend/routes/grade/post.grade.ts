@@ -5,10 +5,7 @@ import { v4 } from 'uuid'
 import { prisma } from '../../database'
 import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
-import { createHash } from '../../utils/hash.utils'
 import { authorize, authenticateTeacher } from '../../utils/middleware.utils'
-
-const SALT = (process.env.PASSWORD_SALT as string) ?? 'XYZ'
 
 //Creates grade
 export default {
