@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import { StatusCodes } from 'http-status-codes'
 import { TRoute } from '../types'
 import { handleRequest } from '../../utils/request.utils'
+import { calculateAverageGrade } from '../../utils/average.utils'
 import {
     authenticateStudent,
     authorize,
@@ -33,7 +34,6 @@ export default {
                     return
                 }
 
-                // Get all the grades for the current user in the subject
                 const grades = await prisma.grade.findMany({
                     include: {
                         Student: true,
@@ -46,18 +46,7 @@ export default {
                     },
                 })
 
-                // Calculate the average grade
-                let count = 0
-                let sum = 0
-                grades.forEach((grade) => {
-                    const value = grade.GradeValue
-                    if (null !== value) {
-                        count++
-                        sum += value
-                    }
-                })
-
-                return sum / count
+                return calculateAverageGrade(user, SubjectID, grades)
             },
         })
     },
